@@ -38,6 +38,11 @@ That's contradictory...
 - Move down by 0.1-0.15mm so that the probe's Z=0 is when the probe touches the bed and not when it is touching the paper
 - Profit
 
+# TODOs:
+- Command for mesh generation is: BED_MESH_CALIBRATE METHOD=rapid_scan (don't use the METHOD=scan SCAN_MODE=rapid)
+- Do not probe closer than 15mm from edge! Dropoff starts for me between 10-15mm (or check it yourself)
+- Explain z_offset - Basically unused, but this is the distance at which the probe can scan the lowest
+
 # Your TODOs:
 - Check if you need to move down by 0.1-0.15mm at different nozzle temperatures (thermal expansion) and decide on nozzle temperature when doing calibrations (cant cold calibrate while doing EDDY's temperature compensation calibration)
 - Find the right value in from the 0.1-0.15mm (yours might be more or less)
