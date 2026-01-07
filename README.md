@@ -43,6 +43,7 @@ That's contradictory...
 - Do not probe closer than 15mm from edge! Dropoff starts for me between 10-15mm (or check it yourself)
 - Explain z_offset - Basically unused, but this is the distance at which the probe can scan the lowest
 - I first use the paper to calibrate the mesh, and when I am close enough (between: can't move paper and barely any pressure on paper) I go down like 0.1 and then 0.025 and then step up/down 0.025 or 0.01 until I hear my 'noisy, vibrating nozzle' transmit the sound into the bed. So basically I do paper method and then I do 'sound calibration' - once the nozzle touches the bed and transmits the vibrations (I listen to 2 sounds - one is just first slight vibration and when I move 0.01 or 0.025 more, the noise gets deeper/lower frequency)
+- Ummm, it all may be because of the temperature stability... Just did a print at EDDY's 43°C when the calibration was done only at 49°C and it printed a tiny bit too far, while at 51°C I got perfect fisrt layer.
 
 # Your TODOs:
 - Check if you need to move down by 0.1-0.15mm at different nozzle temperatures (thermal expansion) and decide on nozzle temperature when doing calibrations (cant cold calibrate while doing EDDY's temperature compensation calibration)
