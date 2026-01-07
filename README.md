@@ -34,7 +34,7 @@ That's contradictory...
 
 # FIX
 - Follow BTT wiki when setting up the EDDY probe
-- When doing paper test (with heated nozzle? every time?) do it as ussual - find where paper just starts lightly dragging and then move the nozzle a bit lower so it drags more.
+- When doing paper test (with heated nozzle? every time?) do it as usual - find where paper just starts lightly dragging and then move the nozzle a bit lower so it drags more.
 - Move down by 0.1-0.15mm so that the probe's Z=0 is when the probe touches the bed and not when it is touching the paper
 - Profit
 
