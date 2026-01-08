@@ -49,24 +49,30 @@ The temperature calibration should not invalidate the Z offset calibration? Mayb
 ### How do I understand the code:
 [This is the important code](https://github.com/Klipper3d/klipper/blob/e605fd18560fbb5a7413ca12b72325ad4e18de16/klippy/extras/temperature_probe.py#L680-L714) that will explain it all, mainly [this part](https://github.com/Klipper3d/klipper/blob/e605fd18560fbb5a7413ca12b72325ad4e18de16/klippy/extras/temperature_probe.py#L701-L714).
 
-These are [the parabolas](#temperature_calibration) from temperature calibration:
+These are [the parabolas](#temperature-calibration) from temperature calibration:
+![Fit functions](z-offset-calibration-fit-functions.png)
 
 Let's start from the Z offset calibration:
 You tell the firmware where the Z=0mm is (via paper/sound test) and then the probe does a lot of measurements at different Z distances:
+![Z offset calibration](z-offset-calibration.png)
 
 Then you do the temperature calibration and you take the [9 Z samples](https://github.com/Klipper3d/klipper/blob/e605fd18560fbb5a7413ca12b72325ad4e18de16/klippy/extras/temperature_probe.py#L483) at different temperatures (the hues of yellow-red) that are then fitted to parabolas:
+![Temperature calibration](z-offset-calibration2.png)
 
 When you then do a Home Z, the probe does look at the value from the probe (light green point) and takes the current probe's temperature. Then it goes and finds the parabola above and under the point and takes the "distance" from both of them (30% and 70%).
 Now the algorithm goes and looks up what value should the probe have at the Z offset calibration temperature (many many blue points) and it gets the dark green point. All that is left is to compare the calculated dark green point to known measured/calibrated Z offsets (blue points).
+![Calculate calibrated Z offset](z-offset-calibration3.png)
 
 Ta daaah, you have the resulting Z offset with temperature calibration.
 
 # Recommendations:
-- Calibrate Z offset near the working temperatures ([blue hue](#how_do_i_understand_the_code)). Home Z near these temperatures.
+- Calibrate Z offset near the working temperatures ([blue hue](#how-do-i-understand-the-code)). Home Z near these temperatures.
 - Do not run long operations (z tilt? long mesh generation?) while the probe is heating up (like 30°C and the stable temperature is 50°C)
-- Basically for ideal results stay near the Z offset calibration temperature ([blue hue](#how_do_i_understand_the_code))
-- Make sure you probe the around the Z offset calibration temperature ([blue hue](#how_do_i_understand_the_code)) while doing the temperature calibration
-- Lower the [max_validation_temp](#temperature_calibration) if you will not reach 60°C during Home Z
+- Basically for ideal results stay near the Z offset calibration temperature ([blue hue](#how-do-i-understand-the-code))
+- Make sure you probe the around the Z offset calibration temperature ([blue hue](#how-do-i-understand-the-code)) while doing the temperature calibration
+- Lower the [max_validation_temp](#temperature-calibration) if you will not reach 60°C during Home Z
 - When doing the probe temperature calibration (TEMPERATURE_PROBE_CALIBRATE PROBE=btt_eddy TARGET=<fill your max temp> STEP=1), set the STEP=1 or STEP=2 and do as the calibrations when you want based on the nozzle temperature. That is mainly because when the probe is at like 35°C the temperature rises sooo fast it is at like 40°C while I wanted the temperature at 35°C. So get ready before and do just the tiny adjustment when the temperature is right
 - You should be able redo the Z offset calibration alone, but remember! If you want to get the nozzle closer to the bed, move it a bit further from the bed when doing Z offset calibration (if you do it by the sound method = nozzle touches the bed, then move a bit up (like a paper width) or so) ??TODO check. It makes sense in picture??:
-- 
+![Recalibrated Z offset](z-offset-calibration4.png)
+
+Or just use the beta Z offset feature.
